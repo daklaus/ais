@@ -13,9 +13,9 @@
 
 int auth_user(char *user, char *pass) {
     if (strncmp(user, USER, sizeof(USER) - 1))
-        return -1;
+        return 0;
     if (strncmp(pass, PASSWORD, sizeof(PASSWORD) - 1))
-        return -1;
+        return 0;
 
     return getuid();
 }
