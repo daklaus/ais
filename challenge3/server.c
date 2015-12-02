@@ -17,7 +17,7 @@
 #include "auth.h"
 #include "canary.h" // we don't trust the standard canaries. we use our own
 
-#define FORK 
+//#define FORK
 
 void handle_con(int sock);
 
@@ -120,9 +120,9 @@ unsigned int clilen;
 
 void respond(char *m) 
 {
-	byte canary1;
+	char canary1;
 	char buf[400];
-	byte canary2;
+	char canary2;
 		
 	init_canary(&canary1,seed1);
 	init_canary(&canary2,seed2);
