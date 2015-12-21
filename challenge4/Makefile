@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-g -Wall -Werror
+CFLAGS=-g -Wall -z execstack
 
 .PHONY: all build clean clean-dist prepare run
 
