@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TicTacToe</string>
+    <string name="new_game">New game</string>
+    <string name="title_activity_new_game">New Game</string>
+    <string name="start_new_game">Start new game</string>
+    <string name="player1_label">Name of player 1:</string>
+    <string name="player2_label">Name of player 2:</string>
+    <string name="ai_controlled">Controlled by AI</string>
+    <string name="default_name1">Brubbel</string>
+    <string name="default_name2">Emil</string>
+</resources>

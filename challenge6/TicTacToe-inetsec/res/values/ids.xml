@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="button1">false</item>
+    <item type="id" name="view1">false</item>
+    <item type="id" name="textView1">false</item>
+    <item type="id" name="editText1">false</item>
+    <item type="id" name="checkBox1">false</item>
+    <item type="id" name="textView2">false</item>
+    <item type="id" name="editText2">false</item>
+    <item type="id" name="checkBox2">false</item>
+</resources>

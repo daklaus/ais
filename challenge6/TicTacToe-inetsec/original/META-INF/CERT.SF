@@ -1,0 +1,37 @@
+Signature-Version: 1.0
+SHA1-Digest-Manifest: mNtBXs+B4bHxzT9V5AlUTYudwdU=
+Created-By: 1.0 (Android)
+
+Name: res/drawable-xhdpi-v4/ic_launcher.png
+SHA1-Digest: qLB+xSuTsdod1eS2aPJel/A5PvE=
+
+Name: res/layout/activity_new_game.xml
+SHA1-Digest: Vk+UThXXtzSRVgNx/yslBBMIBys=
+
+Name: AndroidManifest.xml
+SHA1-Digest: Xkbd7wYbUJ5xk5ZNeU7I++nMS2w=
+
+Name: res/drawable-hdpi-v4/ic_launcher.png
+SHA1-Digest: nVLQ/wUjf9D4KSB2I7WqoHR14JY=
+
+Name: res/layout/activity_main.xml
+SHA1-Digest: 0ZF/cJluterb5yidbQsnusd+7X0=
+
+Name: resources.arsc
+SHA1-Digest: Xjl6vIxFb1mG/2wjAj118i6vs24=
+
+Name: res/raw/blab
+SHA1-Digest: 4cVcns1dgm/veazVG+33XTkIAFw=
+
+Name: res/drawable-mdpi-v4/ic_launcher.png
+SHA1-Digest: NBFXy1maYHW4TAiVCw6R9+EBNqI=
+
+Name: classes.dex
+SHA1-Digest: wend7/k4D5sp18OAF/e7+2g4vzM=
+
+Name: assets/blub
+SHA1-Digest: sK4IH13JbJSkF4SeAX+jVgrtbBY=
+
+Name: res/drawable-xxhdpi-v4/ic_launcher.png
+SHA1-Digest: W7nSszMeL1x0eIt3K2CoCIHU6Qg=
+
