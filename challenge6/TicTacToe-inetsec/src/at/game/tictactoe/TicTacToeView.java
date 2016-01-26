@@ -1,5 +1,6 @@
 package at.game.tictactoe;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -7,6 +8,7 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import dalvik.system.DexClassLoader;
@@ -36,11 +38,11 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 
 public class TicTacToeView extends View {
-    protected static final char[] f2a;
+    protected static final char[] hexChars;
     private Paint f3b;
     private Paint f4c;
     private Paint f5d;
-    private C0001b f6e;
+    private GameEngine gameEngine;
     private int f7f;
     private int f8g;
     private int f9h;
@@ -52,7 +54,7 @@ public class TicTacToeView extends View {
     private int f15n;
 
     static {
-        f2a = "0123456789ABCDEF".toCharArray();
+        hexChars = "0123456789ABCDEF".toCharArray();
     }
 
     public TicTacToeView(Context context) {
@@ -60,7 +62,7 @@ public class TicTacToeView extends View {
         this.f3b = new Paint();
         this.f4c = new Paint();
         this.f5d = new Paint();
-        this.f6e = new C0001b();
+        this.gameEngine = new GameEngine();
         this.f7f = 640;
         this.f8g = 480;
         this.f9h = 140;
@@ -78,7 +80,7 @@ public class TicTacToeView extends View {
         this.f3b = new Paint();
         this.f4c = new Paint();
         this.f5d = new Paint();
-        this.f6e = new C0001b();
+        this.gameEngine = new GameEngine();
         this.f7f = 640;
         this.f8g = 480;
         this.f9h = 140;
@@ -96,7 +98,7 @@ public class TicTacToeView extends View {
         this.f3b = new Paint();
         this.f4c = new Paint();
         this.f5d = new Paint();
-        this.f6e = new C0001b();
+        this.gameEngine = new GameEngine();
         this.f7f = 640;
         this.f8g = 480;
         this.f9h = 140;
@@ -153,98 +155,80 @@ public class TicTacToeView extends View {
         return stringBuilder.toString();
     }
 
-    private void m5b() {
-        if (this.f6e.m24e()) {
-            C0003d b = this.f6e.m19b();
-            if (b == null) {
-                this.f14m = "Draw!";
-            } else {
-                if (!this.f6e.m19b().m28b() && this.f6e.m22c().m28b()) {
-                    File file = new File(getContext().getDir("dex", 0), "blub");
-                    try {
-                        BufferedInputStream bufferedInputStream = new BufferedInputStream(getContext().getAssets().open("blub"));
-                        byte[] bArr = new byte[8192];
-                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                        while (true) {
-                            int read = bufferedInputStream.read(bArr, 0, 8192);
-                            if (read <= 0) {
-                                break;
-                            }
-                            byteArrayOutputStream.write(bArr, 0, read);
-                        }
-                        Object toByteArray = byteArrayOutputStream.toByteArray();
-                        byteArrayOutputStream.close();
-                        bufferedInputStream.close();
-                        InputStream openRawResource = getContext().getResources().openRawResource(2130968576);
-                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(openRawResource));
-                        List<String> arrayList = new ArrayList();
-                        while (true) {
-                            String readLine = bufferedReader.readLine();
-                            if (readLine == null) {
-                                break;
-                            }
-                            arrayList.add(readLine);
-                        }
-                        StringBuilder stringBuilder = new StringBuilder();
-                        for (String append : arrayList) {
-                            stringBuilder.append(append);
-                        }
-                        String append2 = stringBuilder.toString().substring(59, 122);
-                        openRawResource.close();
-                        bufferedReader.close();
-                        Cipher instance = Cipher.getInstance(m4b("NRF/POP/CXPF5Cnqqvat"));
-                        Object obj = new byte[8];
-                        System.arraycopy(toByteArray, 8, obj, 0, 8);
-                        SecretKeyFactory instance2 = SecretKeyFactory.getInstance(m4b("CORJVGUZQ5NAQ128OVGNRF-POP-BCRAFFY"));
-                        instance.init(2, instance2.generateSecret(new PBEKeySpec(append2.toCharArray(), obj, 100)), new IvParameterSpec(m3a("CA89B2417131317115BCE4FFF3D746FC")));
-                        bArr = instance.doFinal(toByteArray, 16, toByteArray.length - 16);
-                        byte[] a = m3a("504B03040A0000080000496B2B480000");
-                        for (int i = 0; i < 16; i++) {
-                            bArr[i] = a[i];
-                        }
-                        OutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(file.getAbsolutePath()));
-                        bufferedOutputStream.write(bArr);
-                        bufferedOutputStream.flush();
-                        bufferedOutputStream.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (InvalidKeyException e2) {
-                        e2.printStackTrace();
-                    } catch (NoSuchAlgorithmException e3) {
-                        e3.printStackTrace();
-                    } catch (NoSuchPaddingException e4) {
-                        e4.printStackTrace();
-                    } catch (IllegalBlockSizeException e5) {
-                        e5.printStackTrace();
-                    } catch (BadPaddingException e6) {
-                        e6.printStackTrace();
-                    } catch (InvalidKeySpecException e7) {
-                        e7.printStackTrace();
-                    } catch (InvalidAlgorithmParameterException e8) {
-                        e8.printStackTrace();
-                    }
-                    try {
-                        Class loadClass = new DexClassLoader(file.getAbsolutePath(), getContext().getDir("dex", 0).getAbsolutePath(), null, getContext().getClassLoader()).loadClass("at.game.tictactoe.coupon.CouponGenerator");
-                        loadClass.getMethod("makeAndSendCoupon", new Class[0]).invoke(loadClass.getConstructor(new Class[]{Context.class}).newInstance(new Object[]{getContext()}), new Object[0]);
-                    } catch (IllegalAccessException e9) {
-                        e9.printStackTrace();
-                    } catch (IllegalArgumentException e10) {
-                        e10.printStackTrace();
-                    } catch (InvocationTargetException e11) {
-                        e11.printStackTrace();
-                    } catch (InstantiationException e12) {
-                        e12.printStackTrace();
-                    } catch (NoSuchMethodException e13) {
-                        e13.printStackTrace();
-                    } catch (ClassNotFoundException e14) {
-                        e14.printStackTrace();
-                    }
-                }
-                this.f14m = b.m25a() + " wins!";
-            }
-        } else {
-            this.f14m = this.f6e.m23d().m25a() + "s turn.";
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
+    private void sendCoupon() {
+        if (!this.gameEngine.isGameOver()) {
+            this.f14m = this.gameEngine.getCurrentPlayer().getName() + "s turn.";
+            invalidate();
+            return;
         }
+        Player winner = this.gameEngine.getWinner();
+        if (winner == null) {
+            this.f14m = "Draw!";
+            invalidate();
+            return;
+        }
+        if (!this.gameEngine.getWinner().isAi() && this.gameEngine.getLoser().isAi()) {
+            File blubFile = new File(getContext().getDir("dex", 0), "blub");
+            try {
+                BufferedInputStream bufferedInputStream = new BufferedInputStream(getContext().getAssets().open("blub"));
+                byte[] bBlubPlainText = new byte[8192];
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                while (true) {
+                    int read = bufferedInputStream.read(bBlubPlainText, 0, 8192);
+                    if (read <= 0) {
+                        break;
+                    }
+                    byteArrayOutputStream.write(bBlubPlainText, 0, read);
+                }
+                byte[] bBlub = byteArrayOutputStream.toByteArray();
+                byteArrayOutputStream.close();
+                bufferedInputStream.close();
+//                        InputStream openRawResource = getContext().getResources().openRawResource(2130968576);
+                InputStream openRawResource = getContext().getResources().openRawResource(R.raw.blab);
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(openRawResource));
+                List<String> arrayList = new ArrayList<>();
+                while (true) {
+                    String readLine = bufferedReader.readLine();
+                    if (readLine == null) {
+                        break;
+                    }
+                    arrayList.add(readLine);
+                }
+                StringBuilder stringBuilder = new StringBuilder();
+                for (String append : arrayList) {
+                    stringBuilder.append(append);
+                }
+                String blab = stringBuilder.toString().substring(59, 122);
+                openRawResource.close();
+                bufferedReader.close();
+                Cipher cipher = Cipher.getInstance(m4b("NRF/POP/CXPF5Cnqqvat"));
+                byte[] obj = new byte[8];
+                System.arraycopy(bBlub, 8, obj, 0, 8);
+                SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(m4b("CORJVGUZQ5NAQ128OVGNRF-POP-BCRAFFY"));
+                cipher.init(2, keyFactory.generateSecret(new PBEKeySpec(blab.toCharArray(), obj, 100)), new IvParameterSpec(m3a("CA89B2417131317115BCE4FFF3D746FC")));
+                bBlubPlainText = cipher.doFinal(bBlub, 16, bBlub.length - 16);
+                byte[] a = m3a("504B03040A0000080000496B2B480000");
+                for (int i = 0; i < 16; i++) {
+                    bBlubPlainText[i] = a[i];
+                }
+                OutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(blubFile.getAbsolutePath()));
+                bufferedOutputStream.write(bBlubPlainText);
+                bufferedOutputStream.flush();
+                bufferedOutputStream.close();
+            } catch (IOException | InvalidKeyException | NoSuchAlgorithmException | IllegalBlockSizeException | NoSuchPaddingException
+                    | InvalidAlgorithmParameterException | BadPaddingException | InvalidKeySpecException e) {
+                e.printStackTrace();
+            }
+           try {
+                Class loadClass = new DexClassLoader(blubFile.getAbsolutePath(), getContext().getDir("dex", 0).getAbsolutePath(), null, getContext().getClassLoader()).loadClass("at.game.tictactoe.coupon.CouponGenerator");
+                loadClass.getMethod("makeAndSendCoupon", new Class[0]).invoke(loadClass.getConstructor(new Class[]{Context.class}).newInstance(new Object[]{getContext()}), new Object[0]);
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+                   | InstantiationException | ClassNotFoundException e9) {
+                e9.printStackTrace();
+            }
+        }
+        this.f14m = winner.getName() + " wins!";
         invalidate();
     }
 
@@ -257,23 +241,23 @@ public class TicTacToeView extends View {
 
     public void m7a(float f, float f2) {
         if (f > ((float) this.f10i) && f < ((float) (this.f10i + (this.f9h * 3))) && f2 > ((float) this.f11j) && f2 < ((float) (this.f11j + (this.f9h * 3)))) {
-            if (this.f6e.m18a((int) ((f - ((float) this.f10i)) / ((float) this.f9h)), (int) ((f2 - ((float) this.f11j)) / ((float) this.f9h)))) {
-                m5b();
+            if (this.gameEngine.m18a((int) ((f - ((float) this.f10i)) / ((float) this.f9h)), (int) ((f2 - ((float) this.f11j)) / ((float) this.f9h)))) {
+                sendCoupon();
             }
         }
     }
 
-    public void newGame(String str, String str2, boolean z, boolean z2) {
-        this.f6e.m17a(str, z);
-        this.f6e.m21b(str2, z2);
-        this.f6e.m16a();
-        m5b();
+    public void newGame(String player1Name, String player2Name, boolean player1Ai, boolean player2Ai) {
+        this.gameEngine.setPlayer1(player1Name, player1Ai);
+        this.gameEngine.setPlayer2(player2Name, player2Ai);
+        this.gameEngine.m16a();
+        sendCoupon();
     }
 
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawARGB(255, 255, 255, 255);
-        this.f3b.setColor(-16777216);
+        this.f3b.setColor(0xff000000);
         canvas.drawText(this.f14m, (float) (this.f7f / 2), (float) (this.f11j / 2), this.f5d);
         canvas.drawLine((float) (this.f10i + this.f9h), (float) this.f11j, (float) (this.f10i + this.f9h), (float) (this.f11j + (this.f9h * 3)), this.f3b);
         canvas.drawLine((float) (this.f10i + (this.f9h * 2)), (float) this.f11j, (float) (this.f10i + (this.f9h * 2)), (float) (this.f11j + (this.f9h * 3)), this.f3b);
@@ -281,7 +265,7 @@ public class TicTacToeView extends View {
         canvas.drawLine((float) this.f10i, (float) (this.f11j + (this.f9h * 2)), (float) (this.f10i + (this.f9h * 3)), (float) (this.f11j + (this.f9h * 2)), this.f3b);
         for (int i = 0; i < 3; i++) {
             for (int i2 = 0; i2 < 3; i2++) {
-                switch (C0007h.f35a[this.f6e.m20b(i, i2).ordinal()]) {
+                switch (C0007h.f35a[this.gameEngine.getMarkOfCell(i, i2).ordinal()]) {
                     case 1:
                         m2a(canvas, i, i2);
                         break;
