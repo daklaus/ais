@@ -1,9 +1,5 @@
 package at.game.tictactoe;
 
-import at.game.tictactoe.e;
-import at.game.tictactoe.f;
-import at.game.tictactoe.g;
-
 public class a {
 
    private f[][] a = new f[3][];
@@ -30,7 +26,7 @@ public class a {
       this.b[7] = new e(this.a[0][2], this.a[1][1], this.a[2][0]);
    }
 
-   public g a(int var1, int var2) {
+   public CellState a(int var1, int var2) {
       return this.a[var1][var2].a();
    }
 
@@ -43,14 +39,14 @@ public class a {
          int var4 = var6.length;
 
          for(int var2 = 0; var2 < var4; ++var2) {
-            var6[var2].a(g.a);
+            var6[var2].a(CellState.EMPTY);
          }
       }
 
    }
 
-   public boolean a(int var1, int var2, g var3) {
-      if(this.a[var1][var2].a() != g.a && var3 != g.a) {
+   public boolean a(int var1, int var2, CellState var3) {
+      if(this.a[var1][var2].a() != CellState.EMPTY && var3 != CellState.EMPTY) {
          return false;
       } else {
          this.a[var1][var2].a(var3);
@@ -58,7 +54,7 @@ public class a {
       }
    }
 
-   public boolean a(g var1) {
+   public boolean a(CellState var1) {
       boolean var5 = false;
       e[] var6 = this.b;
       int var3 = var6.length;
@@ -91,7 +87,7 @@ public class a {
          int var4 = var6.length;
 
          for(int var2 = 0; var2 < var4; ++var2) {
-            if(var6[var2].a() == g.a) {
+            if(var6[var2].a() == CellState.EMPTY) {
                return false;
             }
          }

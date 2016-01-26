@@ -9,75 +9,73 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.view.View;
-import at.game.tictactoe.b;
-import at.game.tictactoe.h;
 
 public class TicTacToeView extends View {
 
-   protected static final char[] a = "0123456789ABCDEF".toCharArray();
+   protected static final char[] hexChars = "0123456789ABCDEF".toCharArray();
    private Paint b = new Paint();
    private Paint c = new Paint();
-   private Paint d = new Paint();
+   private Paint textPaint = new Paint();
    private b e = new b();
-   private int f = 640;
+   private int textWidth = 640;
    private int g = 480;
-   private int h = 140;
+   private int cellSize = 140;
    private int i;
-   private int j;
+   private int textHeight;
    private int k;
    private int l;
-   private String m;
-   private int n;
+   private String message;
+   private int textSize;
 
 
-   public TicTacToeView(Context var1) {
-      super(var1);
-      this.i = (this.f - this.h * 3) / 2;
-      this.j = (this.g - this.h * 3) / 2;
+   public TicTacToeView(Context context) {
+      super(context);
+      this.i = (this.textWidth - this.cellSize * 3) / 2;
+      this.textHeight = (this.g - this.cellSize * 3) / 2;
       this.k = 10;
       this.l = 10;
-      this.m = "To start a new game press the New Game Button";
-      this.n = 20;
+      this.message = "To start a new game press the New Game Button";
+      this.textSize = 20;
       this.a();
    }
 
-   public TicTacToeView(Context var1, AttributeSet var2) {
-      super(var1, var2);
-      this.i = (this.f - this.h * 3) / 2;
-      this.j = (this.g - this.h * 3) / 2;
+   public TicTacToeView(Context context, AttributeSet var2) {
+      super(context, var2);
+      this.i = (this.textWidth - this.cellSize * 3) / 2;
+      this.textHeight = (this.g - this.cellSize * 3) / 2;
       this.k = 10;
       this.l = 10;
-      this.m = "To start a new game press the New Game Button";
-      this.n = 20;
+      this.message = "To start a new game press the New Game Button";
+      this.textSize = 20;
       this.a();
    }
 
-   public TicTacToeView(Context var1, AttributeSet var2, int var3) {
-      super(var1, var2, var3);
-      this.i = (this.f - this.h * 3) / 2;
-      this.j = (this.g - this.h * 3) / 2;
+   public TicTacToeView(Context context, AttributeSet var2, int var3) {
+      super(context, var2, var3);
+      this.i = (this.textWidth - this.cellSize * 3) / 2;
+      this.textHeight = (this.g - this.cellSize * 3) / 2;
       this.k = 10;
       this.l = 10;
-      this.m = "To start a new game press the New Game Button";
-      this.n = 20;
+      this.message = "To start a new game press the New Game Button";
+      this.textSize = 20;
       this.a();
    }
 
    private void a() {
       this.c.setStrokeWidth((float)this.l);
       this.c.setStyle(Style.STROKE);
-      this.d.setTextAlign(Align.CENTER);
-      this.d.setTypeface(Typeface.SANS_SERIF);
-      this.d.setTextSize((float)this.n);
+      this.textPaint.setTextAlign(Align.CENTER);
+      this.textPaint.setTypeface(Typeface.SANS_SERIF);
+      this.textPaint.setTextSize((float)this.textSize);
    }
 
-   private void a(Canvas var1, int var2, int var3) {
-      int var4 = this.i + this.h * var2 + this.k;
-      var2 = this.i + (var2 + 1) * this.h - this.k;
-      int var5 = this.j + this.h * var3 + this.k;
-      var3 = this.j + (var3 + 1) * this.h - this.k;
-      var1.drawLine((float)var4, (float)var5, (float)var2, (float)var3, this.c);
-      var1.drawLine((float)var2, (float)var5, (float)var4, (float)var3, this.c);
+   private void setXMark(Canvas canvas, int var2, int var3) {
+      int var4 = this.i + this.cellSize * var2 + this.k;
+      var2 = this.i + (var2 + 1) * this.cellSize - this.k;
+      int var5 = this.textHeight + this.cellSize * var3 + this.k;
+      var3 = this.textHeight + (var3 + 1) * this.cellSize - this.k;
+      canvas.drawLine((float)var4, (float)var5, (float)var2, (float)var3, this.c);
+      canvas.drawLine((float)var2, (float)var5, (float)var4, (float)var3, this.c);
    }
 
    public static byte[] a(String var0) {
@@ -91,49 +89,49 @@ public class TicTacToeView extends View {
       return var3;
    }
 
-   public static String b(String var0) {
-      StringBuilder var4 = new StringBuilder();
+   public static String b(String input) {
+      StringBuilder stringBuilder = new StringBuilder();
 
-      for(int var3 = 0; var3 < var0.length(); ++var3) {
-         char var2 = var0.charAt(var3);
+      for(int i = 0; i < input.length(); ++i) {
+         char currChar = input.charAt(i);
          char var1;
-         if(var2 >= 97 && var2 <= 109) {
-            var1 = (char)(var2 + 13);
-         } else if(var2 >= 65 && var2 <= 77) {
-            var1 = (char)(var2 + 13);
-         } else if(var2 >= 110 && var2 <= 122) {
-            var1 = (char)(var2 - 13);
+         if(currChar >= 97 && currChar <= 109) {
+            var1 = (char)(currChar + 13);
+         } else if(currChar >= 65 && currChar <= 77) {
+            var1 = (char)(currChar + 13);
+         } else if(currChar >= 110 && currChar <= 122) {
+            var1 = (char)(currChar - 13);
          } else {
-            var1 = var2;
-            if(var2 >= 78) {
-               var1 = var2;
-               if(var2 <= 90) {
-                  var1 = (char)(var2 - 13);
+            var1 = currChar;
+            if(currChar >= 78) {
+               var1 = currChar;
+               if(currChar <= 90) {
+                  var1 = (char)(currChar - 13);
                }
             }
          }
 
-         var4.append(var1);
+         stringBuilder.append(var1);
       }
 
-      return var4.toString();
+      return stringBuilder.toString();
    }
 
    private void b() {
       // $FF: Couldn't be decompiled
    }
 
-   private void b(Canvas var1, int var2, int var3) {
-      var2 = this.i + this.h * var2 + this.k;
-      var3 = this.j + this.h * var3 + this.k;
-      int var4 = this.h - this.k * 2;
+   private void setOMark(Canvas var1, int var2, int var3) {
+      var2 = this.i + this.cellSize * var2 + this.k;
+      var3 = this.textHeight + this.cellSize * var3 + this.k;
+      int var4 = this.cellSize - this.k * 2;
       var1.drawOval(new RectF((float)var2, (float)var3, (float)(var2 + var4), (float)(var3 + var4)), this.c);
    }
 
-   public void a(float var1, float var2) {
-      if(var1 > (float)this.i && var1 < (float)(this.i + this.h * 3) && var2 > (float)this.j && var2 < (float)(this.j + this.h * 3)) {
-         int var3 = (int)((var1 - (float)this.i) / (float)this.h);
-         int var4 = (int)((var2 - (float)this.j) / (float)this.h);
+   public void a(float x, float y) {
+      if(x > (float)this.i && x < (float)(this.i + this.cellSize * 3) && y > (float)this.textHeight && y < (float)(this.textHeight + this.cellSize * 3)) {
+         int var3 = (int)((x - (float)this.i) / (float)this.cellSize);
+         int var4 = (int)((y - (float)this.textHeight) / (float)this.cellSize);
          if(this.e.a(var3, var4)) {
             this.b();
          }
@@ -148,24 +146,24 @@ public class TicTacToeView extends View {
       this.b();
    }
 
-   public void onDraw(Canvas var1) {
-      super.onDraw(var1);
-      var1.drawARGB(255, 255, 255, 255);
-      this.b.setColor(-16777216);
-      var1.drawText(this.m, (float)(this.f / 2), (float)(this.j / 2), this.d);
-      var1.drawLine((float)(this.i + this.h), (float)this.j, (float)(this.i + this.h), (float)(this.j + this.h * 3), this.b);
-      var1.drawLine((float)(this.i + this.h * 2), (float)this.j, (float)(this.i + this.h * 2), (float)(this.j + this.h * 3), this.b);
-      var1.drawLine((float)this.i, (float)(this.j + this.h), (float)(this.i + this.h * 3), (float)(this.j + this.h), this.b);
-      var1.drawLine((float)this.i, (float)(this.j + this.h * 2), (float)(this.i + this.h * 3), (float)(this.j + this.h * 2), this.b);
+   public void onDraw(Canvas canvas) {
+      super.onDraw(canvas);
+      canvas.drawARGB(255, 255, 255, 255);
+      this.b.setColor(0xff000000);
+      canvas.drawText(this.message, (float)(this.textWidth / 2), (float)(this.textHeight / 2), this.textPaint);
+      canvas.drawLine((float)(this.i + this.cellSize), (float)this.textHeight, (float)(this.i + this.cellSize), (float)(this.textHeight + this.cellSize * 3), this.b);
+      canvas.drawLine((float)(this.i + this.cellSize * 2), (float)this.textHeight, (float)(this.i + this.cellSize * 2), (float)(this.textHeight + this.cellSize * 3), this.b);
+      canvas.drawLine((float)this.i, (float)(this.textHeight + this.cellSize), (float)(this.i + this.cellSize * 3), (float)(this.textHeight + this.cellSize), this.b);
+      canvas.drawLine((float)this.i, (float)(this.textHeight + this.cellSize * 2), (float)(this.i + this.cellSize * 3), (float)(this.textHeight + this.cellSize * 2), this.b);
 
       for(int var2 = 0; var2 < 3; ++var2) {
          for(int var3 = 0; var3 < 3; ++var3) {
-            switch(h.a[this.e.b(var2, var3).ordinal()]) {
+            switch(cellSize.a[this.e.b(var2, var3).ordinal()]) {
             case 1:
-               this.a(var1, var2, var3);
+               this.setXMark(canvas, var2, var3);
                break;
             case 2:
-               this.b(var1, var2, var3);
+               this.setOMark(canvas, var2, var3);
             }
          }
       }
@@ -173,10 +171,10 @@ public class TicTacToeView extends View {
    }
 
    public void onSizeChanged(int var1, int var2, int var3, int var4) {
-      this.f = var1;
+      this.textWidth = var1;
       this.g = var2;
-      this.i = (this.f - this.h * 3) / 2;
-      this.j = (this.g - this.h * 3) / 2;
+      this.i = (this.textWidth - this.cellSize * 3) / 2;
+      this.textHeight = (this.g - this.cellSize * 3) / 2;
       super.onSizeChanged(var1, var2, var3, var4);
    }
 

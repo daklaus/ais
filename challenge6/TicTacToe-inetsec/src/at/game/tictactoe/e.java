@@ -1,8 +1,5 @@
 package at.game.tictactoe;
 
-import at.game.tictactoe.f;
-import at.game.tictactoe.g;
-
 public class e {
 
    private f[] a = new f[3];
@@ -14,7 +11,7 @@ public class e {
       this.a[2] = var3;
    }
 
-   public boolean a(g var1) {
+   public boolean a(CellState var1) {
       return this.a[0].a() == var1 && this.a[1].a() == var1 && this.a[2].a() == var1;
    }
 }

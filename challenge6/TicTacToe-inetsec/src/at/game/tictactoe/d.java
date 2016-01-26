@@ -1,15 +1,13 @@
 package at.game.tictactoe;
 
-import at.game.tictactoe.g;
-
 public class d {
 
    private String a;
-   private g b;
+   private CellState b;
    private boolean c;
 
 
-   public d(g var1) {
+   public d(CellState var1) {
       this.b = var1;
    }
 
@@ -29,7 +27,7 @@ public class d {
       return this.c;
    }
 
-   public g c() {
+   public CellState c() {
       return this.b;
    }
 }

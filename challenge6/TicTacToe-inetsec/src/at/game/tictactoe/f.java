@@ -1,21 +1,19 @@
 package at.game.tictactoe;
 
-import at.game.tictactoe.g;
-
 public class f {
 
-   private g a;
+   private CellState a;
 
 
    public f() {
-      this.a = g.a;
+      this.a = CellState.EMPTY;
    }
 
-   public g a() {
+   public CellState a() {
       return this.a;
    }
 
-   public void a(g var1) {
+   public void a(CellState var1) {
       this.a = var1;
    }
 }

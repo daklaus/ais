@@ -1,9 +1,5 @@
 package at.game.tictactoe;
 
-import at.game.tictactoe.a;
-import at.game.tictactoe.d;
-import at.game.tictactoe.g;
-
 public class b {
 
    private d a;
@@ -207,7 +203,7 @@ public class b {
       return this.d;
    }
 
-   public g b(int var1, int var2) {
+   public CellState b(int var1, int var2) {
       return this.f.a(var1, var2);
    }
 
