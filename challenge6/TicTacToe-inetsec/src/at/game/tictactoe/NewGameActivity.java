@@ -6,45 +6,42 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import at.game.tictactoe.MainActivity;
 import java.util.Random;
 
 public class NewGameActivity extends Activity {
+    private String[] f1a;
 
-   private String[] a = new String[]{"Hugo", "Emil", "Tölpel", "Dummel", "Brubbel", "Wusel", "Brösel", "Toffel"};
+    public NewGameActivity() {
+        this.f1a = new String[]{"Hugo", "Emil", "T\u00f6lpel", "Dummel", "Brubbel", "Wusel", "Br\u00f6sel", "Toffel"};
+    }
 
+    private void m0a() {
+        int nextInt;
+        Random random = new Random();
+        int nextInt2 = random.nextInt(this.f1a.length);
+        do {
+            nextInt = random.nextInt(this.f1a.length);
+        } while (nextInt2 == nextInt);
+        EditText editText = (EditText) findViewById(2131165190);
+        ((EditText) findViewById(2131165187)).setText(this.f1a[nextInt2]);
+        editText.setText(this.f1a[nextInt]);
+    }
 
-   private void a() {
-      Random var3 = new Random();
-      int var1 = var3.nextInt(this.a.length);
+    protected void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        setContentView(2130903041);
+        m0a();
+    }
 
-      int var2;
-      do {
-         var2 = var3.nextInt(this.a.length);
-      } while(var1 == var2);
-
-      EditText var5 = (EditText)this.findViewById(2131165187);
-      EditText var4 = (EditText)this.findViewById(2131165190);
-      var5.setText(this.a[var1]);
-      var4.setText(this.a[var2]);
-   }
-
-   protected void onCreate(Bundle var1) {
-      super.onCreate(var1);
-      this.setContentView(2130903041);
-      this.a();
-   }
-
-   public void startNewGame(View var1) {
-      Intent var6 = new Intent(this, MainActivity.class);
-      EditText var2 = (EditText)this.findViewById(2131165187);
-      EditText var3 = (EditText)this.findViewById(2131165190);
-      CheckBox var4 = (CheckBox)this.findViewById(2131165188);
-      CheckBox var5 = (CheckBox)this.findViewById(2131165191);
-      var6.putExtra("at.game.tictactoe.PLAYER1", var2.getText().toString());
-      var6.putExtra("at.game.tictactoe.PLAYER2", var3.getText().toString());
-      var6.putExtra("at.game.tictactoe.AI1", var4.isChecked());
-      var6.putExtra("at.game.tictactoe.AI2", var5.isChecked());
-      this.startActivity(var6);
-   }
+    public void startNewGame(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        EditText editText = (EditText) findViewById(2131165190);
+        CheckBox checkBox = (CheckBox) findViewById(2131165188);
+        CheckBox checkBox2 = (CheckBox) findViewById(2131165191);
+        intent.putExtra("at.game.tictactoe.PLAYER1", ((EditText) findViewById(2131165187)).getText().toString());
+        intent.putExtra("at.game.tictactoe.PLAYER2", editText.getText().toString());
+        intent.putExtra("at.game.tictactoe.AI1", checkBox.isChecked());
+        intent.putExtra("at.game.tictactoe.AI2", checkBox2.isChecked());
+        startActivity(intent);
+    }
 }

