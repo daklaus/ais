@@ -1,3 +1,20 @@
-.cproject
+# Vim files #
+*.swp
+
+# IntelliJ Project Files #
+*.iml
+.idea/
+*.ipr
+*.iws
+.idea_modules/
+
+# Eclipse Project Files #
 .project
+.cproject
+.classpath
 .settings/
+.externalToolBuilders/
+.metadata/
+
+#OSX specific temporary files
+.DS_Store
