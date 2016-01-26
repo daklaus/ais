@@ -11,6 +11,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Toast;
 import dalvik.system.DexClassLoader;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -162,72 +164,90 @@ public class TicTacToeView extends View {
             invalidate();
             return;
         }
-        Player winner = this.gameEngine.getWinner();
-        if (winner == null) {
-            this.f14m = "Draw!";
-            invalidate();
-            return;
-        }
-        if (!this.gameEngine.getWinner().isAi() && this.gameEngine.getLoser().isAi()) {
-            File blubFile = new File(getContext().getDir("dex", 0), "blub");
-            try {
-                BufferedInputStream bufferedInputStream = new BufferedInputStream(getContext().getAssets().open("blub"));
-                byte[] bBlubPlainText = new byte[8192];
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                while (true) {
-                    int read = bufferedInputStream.read(bBlubPlainText, 0, 8192);
-                    if (read <= 0) {
-                        break;
-                    }
-                    byteArrayOutputStream.write(bBlubPlainText, 0, read);
+
+        Player winner = this.gameEngine.getCurrentPlayer();
+//        Player winner = this.gameEngine.getWinner();
+//        if (winner == null) {
+//            this.f14m = "Draw!";
+//            invalidate();
+//            return;
+//        }
+//
+//        if (this.gameEngine.getWinner().isAi() || !this.gameEngine.getLoser().isAi()) {
+//            this.f14m = winner.getName() + " wins!";
+//            invalidate();
+//            return;
+//        }
+
+        File blubFile = new File(getContext().getDir("dex", 0), "blub");
+        try {
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(getContext().getAssets().open("blub"));
+            byte[] bBlubPlainText = new byte[8192];
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            while (true) {
+                int read = bufferedInputStream.read(bBlubPlainText, 0, 8192);
+                if (read <= 0) {
+                    break;
                 }
-                byte[] bBlub = byteArrayOutputStream.toByteArray();
-                byteArrayOutputStream.close();
-                bufferedInputStream.close();
+                byteArrayOutputStream.write(bBlubPlainText, 0, read);
+            }
+            byte[] bBlub = byteArrayOutputStream.toByteArray();
+            byteArrayOutputStream.close();
+            bufferedInputStream.close();
 //                        InputStream openRawResource = getContext().getResources().openRawResource(2130968576);
-                InputStream openRawResource = getContext().getResources().openRawResource(R.raw.blab);
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(openRawResource));
-                List<String> arrayList = new ArrayList<>();
-                while (true) {
-                    String readLine = bufferedReader.readLine();
-                    if (readLine == null) {
-                        break;
-                    }
-                    arrayList.add(readLine);
+            InputStream openRawResource = getContext().getResources().openRawResource(R.raw.blab);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(openRawResource));
+            List<String> arrayList = new ArrayList<>();
+            while (true) {
+                String readLine = bufferedReader.readLine();
+                if (readLine == null) {
+                    break;
                 }
-                StringBuilder stringBuilder = new StringBuilder();
-                for (String append : arrayList) {
-                    stringBuilder.append(append);
-                }
-                String blab = stringBuilder.toString().substring(59, 122);
-                openRawResource.close();
-                bufferedReader.close();
-                Cipher cipher = Cipher.getInstance(m4b("NRF/POP/CXPF5Cnqqvat"));
-                byte[] obj = new byte[8];
-                System.arraycopy(bBlub, 8, obj, 0, 8);
-                SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(m4b("CORJVGUZQ5NAQ128OVGNRF-POP-BCRAFFY"));
-                cipher.init(2, keyFactory.generateSecret(new PBEKeySpec(blab.toCharArray(), obj, 100)), new IvParameterSpec(m3a("CA89B2417131317115BCE4FFF3D746FC")));
-                bBlubPlainText = cipher.doFinal(bBlub, 16, bBlub.length - 16);
-                byte[] a = m3a("504B03040A0000080000496B2B480000");
-                for (int i = 0; i < 16; i++) {
-                    bBlubPlainText[i] = a[i];
-                }
-                OutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(blubFile.getAbsolutePath()));
-                bufferedOutputStream.write(bBlubPlainText);
-                bufferedOutputStream.flush();
-                bufferedOutputStream.close();
-            } catch (IOException | InvalidKeyException | NoSuchAlgorithmException | IllegalBlockSizeException | NoSuchPaddingException
-                    | InvalidAlgorithmParameterException | BadPaddingException | InvalidKeySpecException e) {
-                e.printStackTrace();
+                arrayList.add(readLine);
             }
-           try {
-                Class loadClass = new DexClassLoader(blubFile.getAbsolutePath(), getContext().getDir("dex", 0).getAbsolutePath(), null, getContext().getClassLoader()).loadClass("at.game.tictactoe.coupon.CouponGenerator");
-                loadClass.getMethod("makeAndSendCoupon", new Class[0]).invoke(loadClass.getConstructor(new Class[]{Context.class}).newInstance(new Object[]{getContext()}), new Object[0]);
-            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
-                   | InstantiationException | ClassNotFoundException e9) {
-                e9.printStackTrace();
+            StringBuilder stringBuilder = new StringBuilder();
+            for (String append : arrayList) {
+                stringBuilder.append(append);
             }
+            String blab = stringBuilder.toString().substring(59, 122);
+            openRawResource.close();
+            bufferedReader.close();
+            Cipher cipher = Cipher.getInstance(m4b("NRF/POP/CXPF5Cnqqvat"));
+            byte[] obj = new byte[8];
+            System.arraycopy(bBlub, 8, obj, 0, 8);
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(m4b("CORJVGUZQ5NAQ128OVGNRF-POP-BCRAFFY"));
+            cipher.init(2, keyFactory.generateSecret(new PBEKeySpec(blab.toCharArray(), obj, 100)), new IvParameterSpec(m3a("CA89B2417131317115BCE4FFF3D746FC")));
+            bBlubPlainText = cipher.doFinal(bBlub, 16, bBlub.length - 16);
+            byte[] a = m3a("504B03040A0000080000496B2B480000");
+            for (int i = 0; i < 16; i++) {
+                bBlubPlainText[i] = a[i];
+            }
+            OutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(blubFile.getAbsolutePath()));
+            bufferedOutputStream.write(bBlubPlainText);
+            bufferedOutputStream.flush();
+            bufferedOutputStream.close();
+        } catch (IOException | InvalidKeyException | NoSuchAlgorithmException | IllegalBlockSizeException | NoSuchPaddingException
+                | InvalidAlgorithmParameterException | BadPaddingException | InvalidKeySpecException e) {
+            e.printStackTrace();
         }
+        try {
+            DexClassLoader dexClassLoader = new DexClassLoader(blubFile.getAbsolutePath(), getContext().getDir("dex", 0).getAbsolutePath(), null, getContext().getClassLoader());
+            Class couponGeneratorClass = dexClassLoader.loadClass("at.game.tictactoe.coupon.CouponGenerator");
+            Constructor constructor = couponGeneratorClass.getConstructor(Context.class);
+            Object receiver = constructor.newInstance(getContext());
+
+            Toast.makeText(getContext(), "Sending coupon code...", Toast.LENGTH_SHORT).show();
+
+            couponGeneratorClass.getMethod("makeAndSendCoupon").invoke(receiver);
+
+            Toast.makeText(getContext(), "Coupon code sent successfully!", Toast.LENGTH_SHORT).show();
+
+         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+                | InstantiationException | ClassNotFoundException e9) {
+             e9.printStackTrace();
+         }
+
+
         this.f14m = winner.getName() + " wins!";
         invalidate();
     }
